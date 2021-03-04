@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+import Navigation from "./components/Navigation";
+import Home from "./pages/Home";
+import Products from "./pages/Products";
+import Cart from "./pages/Cart";
+import { useSelector } from "react-redux";
+
+const App = () => {
+  const cartItemCount = useSelector((state) =>
+    state.cart.reduce((count, curItem) => {
+      return count + curItem.quantity;
+    }, 0)
   );
-}
+
+  return (
+    <BrowserRouter>
+      <Navigation cartItemCount={cartItemCount} />
+      <Switch>
+        <Route path="/" component={Home} exact />
+        <Route path="/products" component={Products} exact />
+        <Route path="/cart" component={Cart} exact />
+      </Switch>
+    </BrowserRouter>
+  );
+};
 
 export default App;
