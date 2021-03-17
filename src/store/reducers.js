@@ -43,10 +43,6 @@ const shopReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_PRODUCT:
       const keyword = action.payload;
-      /*       const searchResult = state.products.filter((item) =>
-        item.title.toLowerCase().includes(keyword)
-      );
-      return { ...state, searchResult: searchResult }; */
       return { ...state, keyword: keyword };
 
     case ADD_PRODUCT:
