@@ -1,24 +1,22 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { removeProduct } from "../store/actions";
+import React, { useContext } from "react";
+import ShopContext from "../context/context";
 
 const Cart = () => {
-  const cartItems = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
+  const context = useContext(ShopContext);
 
   return (
     <>
       <main className="cart">
-        {cartItems.length <= 0 && <p>No Item in the Cart!</p>}
+        {context.cart.length <= 0 && <p>No Item in the Cart!</p>}
         <ul>
-          {cartItems.map((cartItem) => (
+          {context.cart.map((cartItem) => (
             <li key={cartItem.id}>
               <div>
                 <strong>{cartItem.title}</strong> - ${cartItem.price} (
                 {cartItem.quantity} {cartItem.style})
               </div>
               <div>
-                <button onClick={() => dispatch(removeProduct(cartItem.id))}>
+                <button onClick={() => context.removeProduct(cartItem.id)}>
                   Remove from Cart
                 </button>
               </div>

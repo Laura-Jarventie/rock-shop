@@ -1,7 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import ShopContext from "../context/context";
 
-const Navigation = (props) => {
+const Navigation = () => {
+  const cartItems = useContext(ShopContext);
+
   return (
     <header className="main-navigation">
       <nav>
@@ -13,7 +17,7 @@ const Navigation = (props) => {
             <NavLink to="/products">Products</NavLink>
           </li>
           <li>
-            <NavLink to="/cart">Cart ({props.cartItemCount})</NavLink>
+            <NavLink to="/cart">Cart ({cartItems.cartItemCount} )</NavLink>
           </li>
         </ul>
       </nav>
